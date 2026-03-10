@@ -45,6 +45,15 @@
             <div class="header-actions">
                 <a href="products.html" class="btn btn-primary"
                     style="padding: 0.75rem 1.5rem; font-size: 0.875rem;">Shop Now</a>
+                <button class="cart-icon-btn" id="cartToggle" aria-label="View shopping cart">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
+                        <path d="M3 6h18" />
+                        <path d="M16 10a4 4 0 0 1-8 0" />
+                    </svg>
+                    <span class="cart-count">0</span>
+                </button>
                 <button class="menu-toggle" aria-label="Toggle menu">☰</button>
             </div>
         </div>
@@ -229,6 +238,27 @@
             </div>
         </div>
     </footer>
+
+    <!-- Shopping Cart Drawer -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="cart-header">
+            <h3>Your Cart</h3>
+            <button class="cart-close" id="cartClose">&times;</button>
+        </div>
+        <div class="cart-items" id="cartItemsContainer">
+            <!-- Items will be injected by JS -->
+            <div class="cart-empty-message">Your cart is empty</div>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total-row">
+                <span>Subtotal</span>
+                <span id="cartSubtotal">$0.00</span>
+            </div>
+            <button class="btn btn-primary" style="width: 100%;"
+                onclick="alert('Proceeding to checkout...')">Checkout</button>
+        </div>
+    </div>
 
     <!-- Main JS -->
     <script src="js/main.js"></script>

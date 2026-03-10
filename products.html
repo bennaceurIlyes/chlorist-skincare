@@ -45,6 +45,15 @@
             <div class="header-actions">
                 <a href="products.html" class="btn btn-primary"
                     style="padding: 0.75rem 1.5rem; font-size: 0.875rem;">Shop Now</a>
+                <button class="cart-icon-btn" id="cartToggle" aria-label="View shopping cart">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
+                        <path d="M3 6h18" />
+                        <path d="M16 10a4 4 0 0 1-8 0" />
+                    </svg>
+                    <span class="cart-count">0</span>
+                </button>
                 <button class="menu-toggle" aria-label="Toggle menu">☰</button>
             </div>
         </div>
@@ -76,8 +85,12 @@
                             <p><strong>Benefits:</strong> Brightening, Clearing dark spots</p>
                             <p style="margin-top:0.5rem; font-size:0.85rem;"><strong>Ingredients:</strong> Licorice
                                 extract, Kojic acid, Alpha arbutin</p>
-                            <a href="product-detail.html" class="btn btn-outline"
-                                style="width: 100%; margin-top: 1.5rem;">View Details</a>
+                            <div style="display: flex; gap: 0.5rem; margin-top: 1.5rem;">
+                                <a href="product-detail.html" class="btn btn-outline" style="flex: 1;">Details</a>
+                                <button class="btn btn-primary add-to-cart" data-id="bechar-cream"
+                                    data-name="Bechar Brightening Cream" data-price="4500" data-image="img/produit2.png"
+                                    style="flex: 1; padding: 0.75rem;">+ Cart</button>
+                            </div>
                         </div>
                     </div>
 
@@ -92,8 +105,12 @@
                             <p><strong>Benefits:</strong> Repairing, Hydrating, Strengthening</p>
                             <p style="margin-top:0.5rem; font-size:0.85rem;"><strong>Ingredients:</strong> Oats,
                                 Flaxseeds, Vitamins B5 & E</p>
-                            <a href="product-detail.html" class="btn btn-outline"
-                                style="width: 100%; margin-top: 1.5rem;">View Details</a>
+                            <div style="display: flex; gap: 0.5rem; margin-top: 1.5rem;">
+                                <a href="product-detail.html" class="btn btn-outline" style="flex: 1;">Details</a>
+                                <button class="btn btn-primary add-to-cart" data-id="lab-serum"
+                                    data-name="Laboratory Serum" data-price="5500" data-image="img/produit2.png"
+                                    style="flex: 1; padding: 0.75rem;">+ Cart</button>
+                            </div>
                         </div>
                     </div>
 
@@ -108,8 +125,12 @@
                             <p><strong>Benefits:</strong> Stimulates growth, Reduces hair loss</p>
                             <p style="margin-top:0.5rem; font-size:0.85rem;"><strong>Ingredients:</strong> 7 Natural
                                 oils, Amla, Reetha, Shikakai</p>
-                            <a href="product-detail.html" class="btn btn-outline"
-                                style="width: 100%; margin-top: 1.5rem;">View Details</a>
+                            <div style="display: flex; gap: 0.5rem; margin-top: 1.5rem;">
+                                <a href="product-detail.html" class="btn btn-outline" style="flex: 1;">Details</a>
+                                <button class="btn btn-primary add-to-cart" data-id="hair-oil"
+                                    data-name="Ayurvedic Hair Oil" data-price="3500" data-image="img/produit2.png"
+                                    style="flex: 1; padding: 0.75rem;">+ Cart</button>
+                            </div>
                         </div>
                     </div>
 
@@ -124,8 +145,12 @@
                             <p><strong>Benefits:</strong> Exfoliating, Brightening, Cleansing</p>
                             <p style="margin-top:0.5rem; font-size:0.85rem;"><strong>Ingredients:</strong> Traditional
                                 Herbs, Aker Fassi</p>
-                            <a href="product-detail.html" class="btn btn-outline"
-                                style="width: 100%; margin-top: 1.5rem;">View Details</a>
+                            <div style="display: flex; gap: 0.5rem; margin-top: 1.5rem;">
+                                <a href="product-detail.html" class="btn btn-outline" style="flex: 1;">Details</a>
+                                <button class="btn btn-primary add-to-cart" data-id="bath-tabrima"
+                                    data-name="Bath Tabrima" data-price="2800" data-image="img/produit1.png"
+                                    style="flex: 1; padding: 0.75rem;">+ Cart</button>
+                            </div>
                         </div>
                     </div>
 
@@ -140,8 +165,12 @@
                             <p><strong>Benefits:</strong> Deodorizing, Brightening underarms</p>
                             <p style="margin-top:0.5rem; font-size:0.85rem;"><strong>Ingredients:</strong> Zinc oxide
                             </p>
-                            <a href="product-detail.html" class="btn btn-outline"
-                                style="width: 100%; margin-top: 1.5rem;">View Details</a>
+                            <div style="display: flex; gap: 0.5rem; margin-top: 1.5rem;">
+                                <a href="product-detail.html" class="btn btn-outline" style="flex: 1;">Details</a>
+                                <button class="btn btn-primary add-to-cart" data-id="underarm-brightener"
+                                    data-name="Underarm Brightener" data-price="2500" data-image="img/produit1.png"
+                                    style="flex: 1; padding: 0.75rem;">+ Cart</button>
+                            </div>
                         </div>
                     </div>
 
@@ -156,8 +185,12 @@
                             <p><strong>Benefits:</strong> Hydration, Sun protection</p>
                             <p style="margin-top:0.5rem; font-size:0.85rem;"><strong>Ingredients:</strong> Hyaluronic
                                 acid, SPF</p>
-                            <a href="product-detail.html" class="btn btn-outline"
-                                style="width: 100%; margin-top: 1.5rem;">View Details</a>
+                            <div style="display: flex; gap: 0.5rem; margin-top: 1.5rem;">
+                                <a href="product-detail.html" class="btn btn-outline" style="flex: 1;">Details</a>
+                                <button class="btn btn-primary add-to-cart" data-id="sunhydra-boost"
+                                    data-name="Sunhydra Boost" data-price="1800" data-image="img/produit1.png"
+                                    style="flex: 1; padding: 0.75rem;">+ Cart</button>
+                            </div>
                         </div>
                     </div>
 
@@ -212,6 +245,27 @@
             </div>
         </div>
     </footer>
+
+    <!-- Shopping Cart Drawer -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="cart-header">
+            <h3>Your Cart</h3>
+            <button class="cart-close" id="cartClose">&times;</button>
+        </div>
+        <div class="cart-items" id="cartItemsContainer">
+            <!-- Items will be injected by JS -->
+            <div class="cart-empty-message">Your cart is empty</div>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total-row">
+                <span>Subtotal</span>
+                <span id="cartSubtotal">$0.00</span>
+            </div>
+            <button class="btn btn-primary" style="width: 100%;"
+                onclick="alert('Proceeding to checkout...')">Checkout</button>
+        </div>
+    </div>
 
     <!-- Main JS -->
     <script src="js/main.js"></script>
