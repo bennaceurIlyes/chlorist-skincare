@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chlorice Skincare | Science Duo Designed With You</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Image Comparison Slider Component -->
+    <script defer src="https://cdn.jsdelivr.net/npm/img-comparison-slider@8/dist/index.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/img-comparison-slider@8/dist/styles.css" />
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="The alliance between modern science (patented formulas) and natural ingredients. Discover Chlorice Skincare clinical treatments.">
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <img src="img/logo.jpg" alt="Chlorice Skincare logo">
+                Chlorice <span style="font-weight: 300;">Lab</span>
+            </a>
+
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html" class="nav-link active">Home</a></li>
+                    <li><a href="products.html" class="nav-link">Products</a></li>
+                    <li><a href="testimonials.html" class="nav-link">Testimonials</a></li>
+                    <li><a href="about.html" class="nav-link">Our Story</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <a href="products.html" class="btn btn-primary"
+                    style="padding: 0.75rem 1.5rem; font-size: 0.875rem;">Shop Now</a>
+                <button class="menu-toggle" aria-label="Toggle menu">☰</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- CONTENT WRAPPER -->
+    <main>
+        <section class="hero"
+            style="min-height: auto; padding: 0; position: relative; overflow: hidden; background: var(--color-off-white);">
+            <img src="img/home-page.png" alt="Chlorice Skincare Lab Background"
+                style="width: 100%; height: auto; display: block; position: relative; z-index: 0;">
+            <div class="hero-overlay"
+                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+                background: linear-gradient(to right, rgba(250, 249, 246, 0.9) 0%, rgba(250, 249, 246, 0.4) 60%, transparent 100%); z-index: 1;">
+            </div>
+            <div class="hero-content"
+                style="position: absolute; top: 50%; transform: translateY(-50%); z-index: 2; margin-left: 5%; max-width: 500px; background: transparent;">
+                <h1 class="fade-in-up" style="font-weight: 300; letter-spacing: 0.05em; margin-bottom: 1.5rem;">Science
+                    <span style="font-weight: 600;">Duo</span>
+                </h1>
+                <p class="text-lead fade-in-up"
+                    style="transition-delay: 0.1s; font-size: 1.1rem; opacity: 0.9; margin-bottom: 2rem;">
+                    Dermatological expertise at the service of your natural beauty.</p>
+                <div class="hero-actions fade-in-up" style="transition-delay: 0.2s;">
+                    <a href="products.html" class="btn btn-primary" style="padding: 1rem 3rem;">Shop Now</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Highlights -->
+        <section class="section bg-white section-products">
+            <div class="container">
+                <div class="section-header text-center fade-in-up">
+                    <span class="text-terracotta"
+                        style="font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 1rem;">Patented
+                        Formulas</span>
+                    <h2>Clinical Interventions</h2>
+                    <p class="text-lead">Discover our most advanced dermatological solutions, laboratory-engineered to
+                        combat hyperpigmentation and repair hair fibers.</p>
+                </div>
+
+                <div class="products-showcase grid">
+                    <!-- Product 1 -->
+                    <div class="product-card fade-in-up">
+                        <div class="product-image">
+                            <img src="img/produit1.png" alt="Bechar Brightening Cream">
+                            <span class="product-badge">Best Seller</span>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-category">Face Care</span>
+                            <h3>Bechar Brightening Cream</h3>
+                            <p>Kojic Acid • Alpha Arbutin • Licorice Extract</p>
+                            <a href="product-detail.html" class="btn btn-outline"
+                                style="width: 100%; margin-top: 1.5rem;">View Details</a>
+                        </div>
+                    </div>
+                    <!-- Product 2 -->
+                    <div class="product-card fade-in-up" style="transition-delay: 0.2s;">
+                        <div class="product-image" style="background-color: var(--color-terracotta-light);">
+                            <img src="img/produit2.png" alt="Ayurvedic Hair Oil">
+                        </div>
+                        <div class="product-info">
+                            <span class="product-category">Hair Treatment</span>
+                            <h3>Ayurvedic Hair Oil</h3>
+                            <p>7 Natural Oils • Amla • Reetha • Shikakai</p>
+                            <a href="product-detail.html" class="btn btn-outline"
+                                style="width: 100%; margin-top: 1.5rem;">View Details</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center fade-in-up" style="margin-top: var(--spacing-lg);">
+                    <a href="products.html" class="btn btn-primary">View All Products</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Before/After Scientific Proof -->
+        <section class="section section-results">
+            <div class="container fade-in-up" style="text-align: center; margin-bottom: 3rem;">
+                <span class="badge">Scientifically Proven</span>
+                <h2>Visible Transformations</h2>
+                <p class="text-lead" style="max-width: 600px; margin: 0 auto;">Discover the real effectiveness of our
+                    formulations.</p>
+            </div>
+            <div class="container fade-in-up" style="transition-delay: 0.2s; max-width: 900px;">
+                <div
+                    style="border-radius: var(--border-radius-lg); overflow: hidden; box-shadow: var(--shadow-lg); background: white; padding: 1px; position: relative;">
+                    <img-comparison-slider
+                        style="display: block; outline: none; border: none; --divider-width: 2px; --divider-color: white; --default-handle-opacity: 0.8;">
+                        <img slot="first" src="img/after.png" alt="After treatment"
+                            style="width: 100%; aspect-ratio: 3/2; object-fit: cover; display: block; border-radius: calc(var(--border-radius-lg) - 1px);" />
+                        <img slot="second" src="img/before.png" alt="Before treatment"
+                            style="width: 100%; aspect-ratio: 3/2; object-fit: cover; display: block; border-radius: calc(var(--border-radius-lg) - 1px);" />
+                    </img-comparison-slider>
+                    <!-- Labels -->
+                    <div
+                        style="position: absolute; top: 20px; left: 20px; background: rgba(0,0,0,0.5); color: white; padding: 5px 12px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; pointer-events: none; z-index: 5;">
+                        Before</div>
+                    <div
+                        style="position: absolute; top: 20px; right: 20px; background: rgba(0,0,0,0.5); color: white; padding: 5px 12px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; pointer-events: none; z-index: 5;">
+                        After</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Lab Philosophy Snippet -->
+        <section class="section bg-botanical text-center">
+            <div class="container">
+                <div class="section-header fade-in-up" style="margin-bottom: 0;">
+                    <img src="img/logo.jpg" alt="Logo"
+                        style="width: 48px; border-radius: 50%; margin: 0 auto 1.5rem; opacity: 0.8;">
+                    <h2>"Chlorice is not just a cosmetics brand; it is a laboratory of solutions designed for you,
+                        combining the power of science with the purity of nature."</h2>
+                </div>
+            </div>
+        </section>
+
+        <!-- Values / Testimonials Snippet -->
+        <section class="section bg-white">
+            <div class="container layout-split align-center">
+                <div class="fade-in-up">
+                    <h3>Heritage & Innovation</h3>
+                    <p class="text-lead">We modernize traditional Algerian (Tabrima, Hammam) and Ayurvedic rituals
+                        through a strict dermatological approach.</p>
+                </div>
+                <div class="fade-in-up" style="transition-delay: 0.2s;">
+                    <blockquote>
+                        <p class="text-lead" style="font-style: italic;">"Bechar cream truly unified my complexion where
+                            other treatments had failed. The fact that it is laboratory-proven gave me confidence."</p>
+                        <footer style="color: var(--color-black-light); margin-top: 1rem;">— Client Feedback, 2026
+                        </footer>
+                    </blockquote>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer"
+        style="background-color: var(--color-botanical-green); padding: var(--spacing-xl) 0 var(--spacing-md);">
+        <div class="container">
+            <div
+                style="display: flex; flex-direction: column; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: var(--spacing-lg); margin-bottom: var(--spacing-md);">
+                <a href="index.html"
+                    style="font-family: var(--font-heading); font-size: 2.5rem; font-weight: 300; letter-spacing: 0.05em; color: var(--color-white); margin-bottom: 1rem;">Chlorice
+                    Lab</a>
+                <p style="color: var(--color-botanical-light); text-align: center; max-width: 400px;">Combining modern
+                    dermatological science with the purity of natural resources.</p>
+            </div>
+            <div class="footer-grid" style="grid-template-columns: repeat(3, 1fr); text-align: center;">
+                <div class="footer-col">
+                    <h4 style="color: var(--color-terracotta-light); letter-spacing: 0.1em; font-weight: 500;">Shop</h4>
+                    <ul class="footer-links" style="align-items: center;">
+                        <li><a href="products.html">All Products</a></li>
+                        <li><a href="products.html">Face Care</a></li>
+                        <li><a href="products.html">Hair Treatments</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 style="color: var(--color-terracotta-light); letter-spacing: 0.1em; font-weight: 500;">Brand
+                    </h4>
+                    <ul class="footer-links" style="align-items: center;">
+                        <li><a href="about.html">Our Story</a></li>
+                        <li><a href="testimonials.html">Testimonials</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 style="color: var(--color-terracotta-light); letter-spacing: 0.1em; font-weight: 500;">Connect
+                    </h4>
+                    <ul class="footer-links" style="align-items: center;">
+                        <li><a href="#">Instagram</a></li>
+                        <li><a href="#">TikTok</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom" style="border-top: none; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+                <p style="color: rgba(255,255,255,0.6);">&copy; 2026 Chlorice Skincare. All rights reserved.</p>
+                <p style="color: rgba(255,255,255,0.6);">Designed in Algeria 🇩🇿</p>
+                <a href="admin-login.html"
+                    style="color: rgba(255,255,255,0.4); text-decoration: none; font-size: 0.75rem;">Admin Access</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Main JS -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>

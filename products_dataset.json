@@ -1,0 +1,56 @@
+[
+  {
+    "name": "Bechar Brightening Cream",
+    "category": "Cream",
+    "ingredients": ["Licorice extract", "Kojic acid", "Alpha arbutin"],
+    "benefits": ["Brightening", "Clearing dark spots"],
+    "skin_concerns": ["Hyperpigmentation", "Dark spots"],
+    "usage": "Usage quotidien",
+    "scientific_explanation": "Formule naturelle combinant des agents éclaircissants reconnus."
+  },
+  {
+    "name": "Becharian Secret Hair Repair Mask",
+    "category": "Hair Treatment",
+    "ingredients": ["Avoine", "Graines de lin", "Vitamines B5 & E"],
+    "benefits": ["Repairing", "Hydrating", "Strengthening"],
+    "hair_concerns": ["Damaged hair", "Dryness"],
+    "usage": "Appliquer sur cheveux humides",
+    "scientific_explanation": "Enrichi en vitamines pour restaurer la fibre capillaire."
+  },
+  {
+    "name": "Ayurvedic Hair Oil",
+    "category": "Hair Treatment",
+    "ingredients": ["7 Natural oils", "Amla", "Reetha", "Shikakai", "Vitamines B5 & E"],
+    "benefits": ["Stimulates growth", "Thickens hair", "Reduces hair loss"],
+    "hair_concerns": ["Hair loss", "Thinning hair", "Baldness (alopecia)"],
+    "usage": "Masser sur le cuir chevelu",
+    "scientific_explanation": "100% Naturel, basé sur les principes ayurvédiques."
+  },
+  {
+    "name": "Bath Tabrima",
+    "category": "Body Care",
+    "ingredients": ["Herbes traditionnelles", "Plantes aromatiques", "Aker Fassi"],
+    "benefits": ["Exfoliating", "Brightening", "Deep cleansing"],
+    "skin_concerns": ["Dead skin", "Uneven skin tone"],
+    "usage": "Mélanger avec du savon noir, appliquer au hammam",
+    "scientific_explanation": "Méthode traditionnelle algérienne pour le renouvellement de la peau."
+  },
+  {
+    "name": "Deodorant & Underarm Brightener",
+    "category": "Body Care",
+    "ingredients": ["Zinc oxide"],
+    "benefits": ["Deodorizing", "Brightening underarms"],
+    "skin_concerns": ["Body odor", "Dark underarms"],
+    "usage": "Usage quotidien",
+    "scientific_explanation": "L'oxyde de zinc apaise et éclaircit la peau sensible."
+  },
+  {
+    "name": "Sunhydra Boost",
+    "category": "Sun Care / Moisturizer",
+    "ingredients": ["Hyaluronic acid", "SPF"],
+    "benefits": ["Hydration", "Sun protection"],
+    "skin_concerns": ["Dryness", "Sun damage"],
+    "usage": "Avant exposition au soleil",
+    "scientific_explanation": "Combine protection UV et hydratation intense."
+  }
+]

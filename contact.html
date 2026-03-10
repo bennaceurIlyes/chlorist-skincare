@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Chlorice Skincare</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .contact-form {
+            background: var(--color-white);
+            padding: var(--spacing-lg);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--color-grey-light);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--color-grey-medium);
+            border-radius: var(--border-radius-sm);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            background-color: var(--color-off-white);
+            transition: border-color 0.2s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--color-botanical-green);
+            background-color: var(--color-white);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 120px;
+        }
+    </style>
+</head>
+
+<body style="background-color: var(--color-off-white);">
+    <header class="header">
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <img src="img/logo.jpg" alt="Logo"> Chlorice <span style="font-weight: 300;">Lab</span>
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="products.html" class="nav-link">Products</a></li>
+                    <li><a href="testimonials.html" class="nav-link">Testimonials</a></li>
+                    <li><a href="faq.html" class="nav-link">FAQ</a></li>
+                    <li><a href="contact.html" class="nav-link active">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <a href="products.html" class="btn btn-outline"
+                    style="padding: 0.75rem 1.5rem; font-size: 0.875rem;">Shop Now</a>
+            </div>
+        </div>
+    </header>
+
+    <main style="padding-top: 120px;">
+        <section class="section">
+            <div class="container layout-split align-center">
+
+                <div class="fade-in-up">
+                    <span class="badge">Get in Touch</span>
+                    <h1 style="margin-top: 1rem;">Expert Care Advice</h1>
+                    <p class="text-lead" style="margin-bottom: 2rem;">Notre équipe est là pour vous accompagner dans la
+                        création de votre routine dermo-cosmétique personnalisée.</p>
+
+                    <div style="margin-bottom: 2rem;">
+                        <h4 style="margin-bottom: 0.5rem; color: var(--color-botanical-green);">Instagram Support</h4>
+                        <p>Envoyez-nous un Message Direct (DM) sur Instagram pour une réponse rapide :<br>
+                            <a href="#"
+                                style="font-weight: 600; text-decoration: underline; color: var(--color-black);">@chloriceskincare.lab</a>
+                        </p>
+                    </div>
+
+                    <div>
+                        <h4 style="margin-bottom: 0.5rem; color: var(--color-botanical-green);">Location</h4>
+                        <p>Algérie (🇩🇿) - Available for international shipping.</p>
+                    </div>
+                </div>
+
+                <div class="contact-form fade-in-up" style="transition-delay: 0.2s;">
+                    <h3 style="margin-bottom: 1.5rem; text-align: center;">Send a Message</h3>
+                    <form action="#" method="POST">
+                        <div class="form-group">
+                            <label class="form-label" for="name">Full Name</label>
+                            <input type="text" id="name" class="form-control" required placeholder="John Doe">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="email">Email Address</label>
+                            <input type="email" id="email" class="form-control" required placeholder="john@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="subject">Subject / Skin Concern</label>
+                            <input type="text" id="subject" class="form-control" required
+                                placeholder="Question about Hyperpigmentation...">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="message">Message</label>
+                            <textarea id="message" class="form-control" required
+                                placeholder="How can we help you today?"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Message</button>
+                    </form>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom" style="border: none;">
+                <p>&copy; 2026 Chlorice Skincare. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
