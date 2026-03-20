@@ -67,10 +67,10 @@
                 style="width: 100%; height: auto; display: block; position: relative; z-index: 0;">
             <div class="hero-overlay"
                 style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
-                background: linear-gradient(to right, rgba(250, 249, 246, 0.9) 0%, rgba(250, 249, 246, 0.4) 60%, transparent 100%); z-index: 1;">
+                background: linear-gradient(to right, rgba(250, 249, 246, 0.9) 0%, rgba(250, 249, 246, 0.4) 60%, transparent 100%); z-index: 1; pointer-events: none;">
             </div>
             <div class="hero-content"
-                style="position: absolute; top: 50%; transform: translateY(-50%); z-index: 2; margin-left: 5%; max-width: 500px; background: transparent;">
+                style="position: absolute; top: 50%; transform: translateY(-50%); z-index: 3; margin-left: 5%; max-width: 500px; background: transparent;">
                 <h1 class="fade-in-up" style="font-weight: 300; letter-spacing: 0.05em; margin-bottom: 1.5rem;">Science
                     <span style="font-weight: 600;">Duo</span>
                 </h1>
@@ -83,8 +83,8 @@
             </div>
         </section>
 
-        <!-- Product Highlights -->
-        <section class="section bg-white section-products">
+        <!-- Product Highlights — loaded from Supabase -->
+        <section class="section bg-white section-products" id="homeProductsSection" style="display:none;">
             <div class="container">
                 <div class="section-header text-center fade-in-up">
                     <span class="text-terracotta"
@@ -95,41 +95,16 @@
                         combat hyperpigmentation and repair hair fibers.</p>
                 </div>
 
-                <div class="products-showcase grid">
-                    <!-- Product 1 -->
-                    <div class="product-card fade-in-up">
-                        <div class="product-image">
-                            <img src="img/produit1.png" alt="Bechar Brightening Cream">
-                            <span class="product-badge">Best Seller</span>
-                        </div>
-                        <div class="product-info">
-                            <span class="product-category">Face Care</span>
-                            <h3>Bechar Brightening Cream</h3>
-                            <p>Kojic Acid • Alpha Arbutin • Licorice Extract</p>
-                            <a href="product-detail.html" class="btn btn-outline"
-                                style="width: 100%; margin-top: 1.5rem;">View Details</a>
-                        </div>
-                    </div>
-                    <!-- Product 2 -->
-                    <div class="product-card fade-in-up" style="transition-delay: 0.2s;">
-                        <div class="product-image" style="background-color: var(--color-terracotta-light);">
-                            <img src="img/produit2.png" alt="Ayurvedic Hair Oil">
-                        </div>
-                        <div class="product-info">
-                            <span class="product-category">Hair Treatment</span>
-                            <h3>Ayurvedic Hair Oil</h3>
-                            <p>7 Natural Oils • Amla • Reetha • Shikakai</p>
-                            <a href="product-detail.html" class="btn btn-outline"
-                                style="width: 100%; margin-top: 1.5rem;">View Details</a>
-                        </div>
-                    </div>
-                </div>
+                <div class="products-showcase grid" id="homeProductsGrid"></div>
 
                 <div class="text-center fade-in-up" style="margin-top: var(--spacing-lg);">
                     <a href="products.html" class="btn btn-primary">View All Products</a>
                 </div>
             </div>
         </section>
+
+
+
 
         <!-- Before/After Scientific Proof -->
         <section class="section section-results">
@@ -204,7 +179,7 @@
                 <p style="color: var(--color-botanical-light); text-align: center; max-width: 400px;">Combining modern
                     dermatological science with the purity of natural resources.</p>
             </div>
-            <div class="footer-grid" style="grid-template-columns: repeat(3, 1fr); text-align: center;">
+            <div class="footer-grid">
                 <div class="footer-col">
                     <h4 style="color: var(--color-terracotta-light); letter-spacing: 0.1em; font-weight: 500;">Shop</h4>
                     <ul class="footer-links" style="align-items: center;">
@@ -255,13 +230,49 @@
                 <span>Subtotal</span>
                 <span id="cartSubtotal">$0.00</span>
             </div>
-            <button class="btn btn-primary" style="width: 100%;"
-                onclick="alert('Proceeding to checkout...')">Checkout</button>
+            <button class="btn btn-primary" style="width: 100%;" onclick="openCheckoutModal()">Checkout</button>
         </div>
     </div>
 
+    <!-- Supabase CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase.js"></script>
     <!-- Main JS -->
     <script src="js/main.js"></script>
+
+    <!-- Home: Load products from Supabase -->
+    <script>
+        (async function loadHomeProducts() {
+            try {
+                const { data: products, error } = await window._supabase
+                    .from('products')
+                    .select('*')
+                    .order('created_at', { ascending: false })
+                    .limit(4);
+
+                if (error || !products || products.length === 0) return;
+
+                const bgColors = ['var(--color-botanical-light)', 'var(--color-terracotta-light)', '#EAF0F6', '#FFF2D6'];
+                document.getElementById('homeProductsGrid').innerHTML = products.map((p, i) => `
+                    <div class="product-card fade-in-up visible" style="transition-delay:${i * 0.1}s;">
+                        <div class="product-image" style="background-color:${bgColors[i % 4]};">
+                            <img src="${p.image || 'img/produit1.png'}" alt="${p.name}" onerror="this.src='img/produit1.png'">
+                            ${i === 0 ? '<span class="product-badge">Best Seller</span>' : ''}
+                        </div>
+                        <div class="product-info">
+                            <h3>${p.name}</h3>
+                            <p>${p.description || ''}</p>
+                            <a href="products.html" class="btn btn-outline" style="width:100%;margin-top:1.5rem;">View Details</a>
+                        </div>
+                    </div>
+                `).join('');
+
+                document.getElementById('homeProductsSection').style.display = '';
+            } catch (err) {
+                console.error('Home products load error:', err);
+            }
+        })();
+    </script>
 </body>
 
 </html>

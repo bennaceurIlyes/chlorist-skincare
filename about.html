@@ -175,7 +175,7 @@
         <!-- Proudly Algerian -->
         <section class="section">
             <div class="container grid"
-                style="grid-template-columns: 1fr 1.5fr; gap: var(--spacing-xl); align-items: center;">
+                style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--spacing-xl); align-items: center;">
                 <div class="fade-in-up">
                     <img src="img/before.png" alt="Algerian Heritage"
                         style="border-radius: var(--border-radius-lg); width: 100%; box-shadow: var(--shadow-md);">
@@ -216,7 +216,7 @@
                 <p style="color: var(--color-botanical-light); text-align: center; max-width: 400px;">Combining modern
                     dermatological science with the purity of natural resources.</p>
             </div>
-            <div class="footer-grid" style="grid-template-columns: repeat(3, 1fr); text-align: center;">
+            <div class="footer-grid">
                 <div class="footer-col">
                     <h4 style="color: var(--color-terracotta-light); letter-spacing: 0.1em; font-weight: 500;">Shop</h4>
                     <ul class="footer-links" style="align-items: center;">
@@ -267,12 +267,13 @@
                 <span>Subtotal</span>
                 <span id="cartSubtotal">$0.00</span>
             </div>
-            <button class="btn btn-primary" style="width: 100%;"
-                onclick="alert('Proceeding to checkout...')">Checkout</button>
+            <button class="btn btn-primary" style="width: 100%;" onclick="openCheckoutModal()">Checkout</button>
         </div>
     </div>
 
     <!-- Main JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase.js"></script>
     <script src="js/main.js"></script>
 </body>
 
