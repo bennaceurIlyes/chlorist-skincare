@@ -184,9 +184,11 @@ document.addEventListener('DOMContentLoaded', () => {
     updateCartUI();
 
     // =========================================================
-    // 5. Checkout Modal — inject into DOM
+    // 5. Checkout Modal — inject into DOM (skip on dedicated checkout page)
     // =========================================================
-    injectCheckoutModal();
+    if (!window.location.pathname.includes('checkout.html')) {
+        injectCheckoutModal();
+    }
 
     function injectCheckoutModal() {
         if (document.getElementById('checkoutModal')) return;
@@ -417,10 +419,5 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Override checkout button in cart drawer
-    const cartFooterCheckout = cartDrawer?.querySelector('.btn.btn-primary');
-    if (cartFooterCheckout) {
-        cartFooterCheckout.removeAttribute('onclick');
-        cartFooterCheckout.addEventListener('click', () => window.openCheckoutModal());
-    }
+    // Checkout button in cart drawer now navigates to checkout.html (handled via href)
 });

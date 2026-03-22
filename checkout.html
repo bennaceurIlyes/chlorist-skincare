@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout | Chlorice Lab</title>
+    <meta name="description" content="Complete your Chlorice Skincare order. Secure checkout with fast delivery.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        /* ── Page Layout ─────────────────────────────── */
+        .checkout-page {
+            min-height: 100vh;
+            background: #F7F8F5;
+            padding-top: 100px;
+            padding-bottom: 4rem;
+        }
+
+        .checkout-wrapper {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .checkout-heading {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .checkout-heading .badge {
+            display: inline-block;
+            background: var(--color-botanical-green, #385A48);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            padding: 0.35rem 0.9rem;
+            border-radius: 50px;
+            margin-bottom: 0.8rem;
+        }
+
+        .checkout-heading h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 300;
+            color: #1a1a1a;
+            margin: 0;
+        }
+
+        .checkout-heading h1 span { font-weight: 600; }
+
+        /* ── Two-column grid ─────────────────────────── */
+        .checkout-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.15fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        @media (max-width: 768px) {
+            .checkout-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ── Cards ───────────────────────────────────── */
+        .checkout-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.06);
+        }
+
+        .checkout-card h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin: 0 0 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #F0F0F0;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .checkout-card h2 svg {
+            width: 18px; height: 18px;
+            color: var(--color-botanical-green, #385A48);
+        }
+
+        /* ── Order Summary ────────────────────────────── */
+        #orderSummaryItems { margin-bottom: 1.2rem; }
+
+        .summary-item {
+            display: flex;
+            gap: 0.85rem;
+            align-items: center;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #F5F5F5;
+        }
+
+        .summary-item:last-child { border-bottom: none; }
+
+        .summary-item-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+            object-fit: cover;
+            background: #f0f0f0;
+            flex-shrink: 0;
+        }
+
+        .summary-item-info { flex: 1; }
+
+        .summary-item-info h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin: 0 0 0.2rem;
+        }
+
+        .summary-item-info .qty {
+            font-size: 0.8rem;
+            color: #9CA3AF;
+        }
+
+        .summary-item-price {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #385A48;
+            white-space: nowrap;
+        }
+
+        /* Totals table */
+        .summary-totals {
+            border-top: 2px solid #F0F0F0;
+            padding-top: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.35rem 0;
+            color: #6B7280;
+        }
+
+        .summary-row.total {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            padding-top: 0.7rem;
+            border-top: 1px solid #E5E7EB;
+            margin-top: 0.3rem;
+        }
+
+        .shipping-tag {
+            display: inline-block;
+            background: #DCFCE7;
+            color: #166534;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.2rem 0.6rem;
+            border-radius: 50px;
+        }
+
+        /* Empty cart message */
+        .empty-cart-notice {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: #9CA3AF;
+        }
+
+        .empty-cart-notice svg {
+            width: 48px; height: 48px;
+            margin-bottom: 0.8rem;
+            stroke: #D1D5DB;
+        }
+
+        /* Security note */
+        .security-note {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.75rem;
+            color: #9CA3AF;
+            margin-top: 1.2rem;
+        }
+
+        .security-note svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+        /* ── Form ────────────────────────────────────── */
+        .form-section {
+            margin-bottom: 1.6rem;
+        }
+
+        .form-section label {
+            display: block;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #385A48;
+            margin-bottom: 0.45rem;
+        }
+
+        .form-section input,
+        .form-section select,
+        .form-section textarea {
+            width: 100%;
+            padding: 0.9rem 1.1rem;
+            border: 1.5px solid #E5E7EB;
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            color: #1a1a1a;
+            background: #FAFAFA;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            box-sizing: border-box;
+        }
+
+        .form-section input:focus,
+        .form-section select:focus,
+        .form-section textarea:focus {
+            outline: none;
+            border-color: #385A48;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(56,90,72,0.07);
+        }
+
+        .form-section textarea { resize: vertical; min-height: 90px; }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        @media (max-width: 480px) {
+            .form-row { grid-template-columns: 1fr; }
+        }
+
+        /* payment badge */
+        .payment-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #F0F9F4;
+            border: 1px solid #BBF7D0;
+            border-radius: 10px;
+            padding: 0.8rem 1rem;
+            font-size: 0.85rem;
+            color: #166534;
+            font-weight: 500;
+            margin-bottom: 1.6rem;
+        }
+
+        .payment-badge svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+        /* ── Submit Button ────────────────────────────── */
+        .submit-btn {
+            width: 100%;
+            padding: 1.05rem 1rem;
+            background: linear-gradient(135deg, #385A48, #2D4A39);
+            color: white;
+            border: none;
+            border-radius: 14px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+            box-shadow: 0 4px 20px rgba(56,90,72,0.35);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+        }
+
+        .submit-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 28px rgba(56,90,72,0.45);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.65;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Spinner */
+        .spinner {
+            width: 18px; height: 18px;
+            border: 2.5px solid rgba(255,255,255,0.4);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* ── Error ───────────────────────────────────── */
+        .error-box {
+            background: #FEE2E2;
+            border: 1px solid #FECACA;
+            color: #B91C1C;
+            padding: 0.8rem 1rem;
+            border-radius: 10px;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        /* ── Success Screen ───────────────────────────── */
+        #successScreen {
+            display: none;
+            text-align: center;
+            padding: 2rem 1rem;
+        }
+
+        .success-icon {
+            width: 72px; height: 72px;
+            background: linear-gradient(135deg, #385A48, #2D4A39);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            animation: popIn 0.5s cubic-bezier(0.16,1,0.3,1);
+        }
+
+        .success-icon svg { width: 36px; height: 36px; stroke: white; }
+
+        @keyframes popIn {
+            from { transform: scale(0.5); opacity: 0; }
+            to   { transform: scale(1);   opacity: 1; }
+        }
+
+        #successScreen h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin: 0 0 0.5rem;
+        }
+
+        #successScreen p { color: #6B7280; line-height: 1.6; margin-bottom: 0.4rem; }
+
+        #successScreen .order-num {
+            display: inline-block;
+            background: #F0F9F4;
+            color: #166534;
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            margin: 0.8rem 0 1.5rem;
+        }
+
+        #successScreen .continue-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: #385A48;
+            color: white;
+            padding: 0.85rem 2rem;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        #successScreen .continue-btn:hover {
+            background: #2D4A39;
+            transform: translateY(-1px);
+        }
+
+        /* ── Steps indicator ──────────────────────────── */
+        .checkout-steps {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+            margin-bottom: 2.5rem;
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #D1D5DB;
+        }
+
+        .step.done { color: #385A48; }
+        .step.active { color: #1a1a1a; }
+
+        .step-circle {
+            width: 28px; height: 28px;
+            border-radius: 50%;
+            background: #E5E7EB;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .step.done .step-circle {
+            background: #385A48;
+            color: white;
+        }
+
+        .step.active .step-circle {
+            background: #1a1a1a;
+            color: white;
+        }
+
+        .step-line {
+            width: 60px;
+            height: 2px;
+            background: #E5E7EB;
+            margin: 0 0.25rem;
+        }
+
+        .step-line.done { background: #385A48; }
+
+        /* Trust badges */
+        .trust-badges {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+
+        .trust-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.75rem;
+            color: #9CA3AF;
+        }
+
+        .trust-badge svg { width: 14px; height: 14px; }
+    </style>
+</head>
+
+<body>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <img src="img/logo.jpg" alt="Chlorice Skincare logo">
+                Chlorice <span style="font-weight: 300;">Lab</span>
+            </a>
+
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="products.html" class="nav-link">Products</a></li>
+                    <li><a href="testimonials.html" class="nav-link">Testimonials</a></li>
+                    <li><a href="about.html" class="nav-link">Our Story</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <a href="products.html" class="btn btn-primary"
+                    style="padding: 0.75rem 1.5rem; font-size: 0.875rem;">Shop Now</a>
+                <button class="cart-icon-btn" id="cartToggle" aria-label="View shopping cart">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
+                        <path d="M3 6h18" />
+                        <path d="M16 10a4 4 0 0 1-8 0" />
+                    </svg>
+                    <span class="cart-count">0</span>
+                </button>
+                <button class="menu-toggle" aria-label="Toggle menu">☰</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Shopping Cart Drawer -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="cart-header">
+            <h3>Your Cart</h3>
+            <button class="cart-close" id="cartClose">&times;</button>
+        </div>
+        <div class="cart-items" id="cartItemsContainer">
+            <div class="cart-empty-message">Your cart is empty</div>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total-row">
+                <span>Subtotal</span>
+                <span id="cartSubtotal">0 DA</span>
+            </div>
+            <a href="checkout.html" class="btn btn-primary" style="width:100%; text-align:center; display:block; padding: 0.9rem;">
+                Proceed to Checkout
+            </a>
+        </div>
+    </div>
+
+    <!-- ── CHECKOUT PAGE ─────────────────────────────── -->
+    <main class="checkout-page">
+        <div class="checkout-wrapper">
+
+            <!-- Page title -->
+            <div class="checkout-heading fade-in-up">
+                <div class="badge">Secure Checkout</div>
+                <h1>Complete Your <span>Order</span></h1>
+            </div>
+
+            <!-- Steps -->
+            <div class="checkout-steps fade-in-up">
+                <div class="step done">
+                    <div class="step-circle">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    </div>
+                    Cart
+                </div>
+                <div class="step-line done"></div>
+                <div class="step active">
+                    <div class="step-circle">2</div>
+                    Checkout
+                </div>
+                <div class="step-line"></div>
+                <div class="step">
+                    <div class="step-circle">3</div>
+                    Confirmation
+                </div>
+            </div>
+
+            <!-- Two-column grid -->
+            <div class="checkout-grid">
+
+                <!-- LEFT: Order Summary -->
+                <div class="checkout-card fade-in-up">
+                    <h2>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 13h6M9 17h4"/></svg>
+                        Order Summary
+                    </h2>
+
+                    <div id="orderSummaryItems">
+                        <!-- filled by JS -->
+                        <div class="empty-cart-notice">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                            <p>Your cart is empty.<br><a href="products.html" style="color:#385A48;font-weight:600;">Browse products →</a></p>
+                        </div>
+                    </div>
+
+                    <div class="summary-totals" id="summaryTotals" style="display:none;">
+                        <div class="summary-row">
+                            <span>Subtotal</span>
+                            <span id="summarySubtotal">0 DA</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Shipping</span>
+                            <span class="shipping-tag">FREE</span>
+                        </div>
+                        <div class="summary-row total">
+                            <span>Total</span>
+                            <span id="summaryTotal">0 DA</span>
+                        </div>
+                    </div>
+
+                    <div class="security-note">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                        Your information is protected with 256-bit SSL encryption.
+                    </div>
+                </div>
+
+                <!-- RIGHT: Form -->
+                <div class="checkout-card fade-in-up" style="transition-delay:0.1s;">
+
+                    <!-- ── SUCCESS screen (hidden by default) ── -->
+                    <div id="successScreen">
+                        <div class="success-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        </div>
+                        <h2>Order Placed! 🎉</h2>
+                        <p>Thank you for your order. We'll contact you shortly to confirm your delivery.</p>
+                        <div class="order-num" id="successOrderNum"></div>
+                        <p style="font-size:0.875rem;">Estimated delivery: <strong>3–5 business days</strong></p>
+                        <br>
+                        <a href="products.html" class="continue-btn">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m18 15-6-6-6 6"/></svg>
+                            Continue Shopping
+                        </a>
+                    </div>
+
+                    <!-- ── ORDER FORM ── -->
+                    <div id="checkoutFormWrapper">
+                        <h2>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                            Delivery Information
+                        </h2>
+
+                        <!-- Cash on delivery badge -->
+                        <div class="payment-badge">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+                            Cash on Delivery — Pay when you receive your order
+                        </div>
+
+                        <div class="error-box" id="errorBox"></div>
+
+                        <form id="checkoutForm" novalidate>
+                            <div class="form-row">
+                                <div class="form-section">
+                                    <label for="co_firstname">First Name *</label>
+                                    <input type="text" id="co_firstname" placeholder="Fatima" required autocomplete="given-name">
+                                </div>
+                                <div class="form-section">
+                                    <label for="co_lastname">Last Name *</label>
+                                    <input type="text" id="co_lastname" placeholder="Zohra" required autocomplete="family-name">
+                                </div>
+                            </div>
+
+                            <div class="form-section">
+                                <label for="co_phone">Phone Number *</label>
+                                <input type="tel" id="co_phone" placeholder="0555 123 456" required autocomplete="tel">
+                            </div>
+
+                            <div class="form-section">
+                                <label for="co_email">Email (optional)</label>
+                                <input type="email" id="co_email" placeholder="you@example.com" autocomplete="email">
+                            </div>
+
+                            <div class="form-section">
+                                <label for="co_wilaya">Wilaya *</label>
+                                <select id="co_wilaya" required>
+                                    <option value="">— Select your Wilaya —</option>
+                                    <option>Adrar</option><option>Chlef</option><option>Laghouat</option>
+                                    <option>Oum El Bouaghi</option><option>Batna</option><option>Béjaïa</option>
+                                    <option>Biskra</option><option>Béchar</option><option>Blida</option>
+                                    <option>Bouira</option><option>Tamanrasset</option><option>Tébessa</option>
+                                    <option>Tlemcen</option><option>Tiaret</option><option>Tizi Ouzou</option>
+                                    <option>Alger</option><option>Djelfa</option><option>Jijel</option>
+                                    <option>Sétif</option><option>Saïda</option><option>Skikda</option>
+                                    <option>Sidi Bel Abbès</option><option>Annaba</option><option>Guelma</option>
+                                    <option>Constantine</option><option>Médéa</option><option>Mostaganem</option>
+                                    <option>M'Sila</option><option>Mascara</option><option>Ouargla</option>
+                                    <option>Oran</option><option>El Bayadh</option><option>Illizi</option>
+                                    <option>Bordj Bou Arréridj</option><option>Boumerdès</option>
+                                    <option>El Tarf</option><option>Tindouf</option><option>Tissemsilt</option>
+                                    <option>El Oued</option><option>Khenchela</option><option>Souk Ahras</option>
+                                    <option>Tipaza</option><option>Mila</option><option>Aïn Defla</option>
+                                    <option>Naâma</option><option>Aïn Témouchent</option><option>Ghardaïa</option>
+                                    <option>Relizane</option><option>Timimoun</option><option>Bordj Badji Mokhtar</option>
+                                    <option>Ouled Djellal</option><option>Béni Abbès</option><option>In Salah</option>
+                                    <option>In Guezzam</option><option>Touggourt</option><option>Djanet</option>
+                                    <option>El M'Ghair</option><option>El Meniaa</option>
+                                </select>
+                            </div>
+
+                            <div class="form-section">
+                                <label for="co_address">Full Address *</label>
+                                <textarea id="co_address" placeholder="Street name, district, city…" required></textarea>
+                            </div>
+
+                            <div class="form-section">
+                                <label for="co_notes">Order Notes (optional)</label>
+                                <input type="text" id="co_notes" placeholder="e.g., Leave at the door, call before delivery…">
+                            </div>
+
+                            <button type="submit" class="submit-btn" id="submitBtn">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 2-3.5 7-7.5 1 5.5 5.4L5 23l7-3.7 7 3.7-1.5-7.6L23 10l-7.5-1z"/></svg>
+                                Place My Order
+                            </button>
+
+                            <div class="trust-badges">
+                                <div class="trust-badge">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                                    Secure
+                                </div>
+                                <div class="trust-badge">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                                    Fast Delivery
+                                </div>
+                                <div class="trust-badge">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                                    Made in Algeria
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer" style="background-color: var(--color-botanical-green); padding: var(--spacing-xl) 0 var(--spacing-md);">
+        <div class="container">
+            <div style="display: flex; flex-direction: column; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: var(--spacing-lg); margin-bottom: var(--spacing-md);">
+                <a href="index.html" style="font-family: var(--font-heading); font-size: 2.5rem; font-weight: 300; letter-spacing: 0.05em; color: var(--color-white); margin-bottom: 1rem;">Chlorice Lab</a>
+                <p style="color: var(--color-botanical-light); text-align: center; max-width: 400px;">Combining modern dermatological science with the purity of natural resources.</p>
+            </div>
+            <div class="footer-bottom" style="border-top: none; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+                <p style="color: rgba(255,255,255,0.6);">&copy; 2026 Chlorice Skincare. All rights reserved.</p>
+                <p style="color: rgba(255,255,255,0.6);">Designed in Algeria 🇩🇿</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Supabase CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase.js"></script>
+    <!-- Main JS (for cart drawer, nav, etc.) -->
+    <script src="js/main.js"></script>
+
+    <!-- Checkout Page Logic -->
+    <script>
+        (function () {
+            // ── Cart from localStorage ──────────────────
+            let cart = [];
+            try {
+                cart = JSON.parse(localStorage.getItem('chlorice_cart')) || [];
+            } catch (e) { cart = []; }
+
+            const summaryEl   = document.getElementById('orderSummaryItems');
+            const totalsEl    = document.getElementById('summaryTotals');
+            const subtotalEl  = document.getElementById('summarySubtotal');
+            const totalEl     = document.getElementById('summaryTotal');
+            const form        = document.getElementById('checkoutForm');
+            const submitBtn   = document.getElementById('submitBtn');
+            const errorBox    = document.getElementById('errorBox');
+            const successEl   = document.getElementById('successScreen');
+            const formWrapper = document.getElementById('checkoutFormWrapper');
+
+            // ── Render order summary ────────────────────
+            function renderSummary() {
+                if (cart.length === 0) return; // keep empty notice visible
+
+                const subtotal = cart.reduce((a, i) => a + parseFloat(i.price) * i.quantity, 0);
+
+                summaryEl.innerHTML = cart.map(item => `
+                    <div class="summary-item">
+                        <img class="summary-item-img"
+                             src="${item.image || 'img/produit1.png'}"
+                             alt="${item.name}"
+                             onerror="this.src='img/produit1.png'">
+                        <div class="summary-item-info">
+                            <h4>${item.name}</h4>
+                            <div class="qty">Qty: ${item.quantity}</div>
+                        </div>
+                        <div class="summary-item-price">
+                            ${(parseFloat(item.price) * item.quantity).toLocaleString()} DA
+                        </div>
+                    </div>
+                `).join('');
+
+                subtotalEl.textContent = subtotal.toLocaleString() + ' DA';
+                totalEl.textContent    = subtotal.toLocaleString() + ' DA';
+                totalsEl.style.display = '';
+            }
+
+            renderSummary();
+
+            // ── Form submission ─────────────────────────
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                if (cart.length === 0) {
+                    showError('Your cart is empty. Please add products before checking out.');
+                    return;
+                }
+
+                const firstname = document.getElementById('co_firstname').value.trim();
+                const lastname  = document.getElementById('co_lastname').value.trim();
+                const phone     = document.getElementById('co_phone').value.trim();
+                const wilaya    = document.getElementById('co_wilaya').value;
+                const address   = document.getElementById('co_address').value.trim();
+
+                // Basic validation
+                if (!firstname || !lastname) { showError('Please enter your full name.'); return; }
+                if (!phone)   { showError('Please enter your phone number.'); return; }
+                if (!wilaya)  { showError('Please select your Wilaya.'); return; }
+                if (!address) { showError('Please enter your delivery address.'); return; }
+
+                setLoading(true);
+                hideError();
+
+                try {
+                    const db = window._supabase;
+                    if (!db) throw new Error('Database not connected. Please refresh the page.');
+
+                    const customerName = `${firstname} ${lastname}`;
+                    const fullAddress  = `${address}, ${wilaya}`;
+
+                    // 1. Insert order
+                    const { data: orderData, error: orderErr } = await db
+                        .from('orders')
+                        .insert({
+                            customer_name:    customerName,
+                            customer_phone:   phone,
+                            customer_address: fullAddress
+                        })
+                        .select('id')
+                        .single();
+
+                    if (orderErr) throw orderErr;
+                    const orderId = orderData.id;
+
+                    // 2. Insert order items
+                    const items = cart.map(item => ({
+                        order_id:   orderId,
+                        product_id: item.productDbId || null,
+                        quantity:   item.quantity,
+                        price:      parseFloat(item.price)
+                    }));
+
+                    const { error: itemsErr } = await db.from('order_items').insert(items);
+                    if (itemsErr) throw itemsErr;
+
+                    // 3. Clear cart & show success
+                    localStorage.removeItem('chlorice_cart');
+                    cart = [];
+                    showSuccess(orderId);
+
+                } catch (err) {
+                    console.error('Checkout error:', err);
+                    showError('Failed to place order: ' + (err.message || 'Please try again.'));
+                    setLoading(false);
+                }
+            });
+
+            // ── Helpers ─────────────────────────────────
+            function setLoading(on) {
+                submitBtn.disabled = on;
+                submitBtn.innerHTML = on
+                    ? '<div class="spinner"></div> Placing Order…'
+                    : '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 2-3.5 7-7.5 1 5.5 5.4L5 23l7-3.7 7 3.7-1.5-7.6L23 10l-7.5-1z"/></svg> Place My Order';
+            }
+
+            function showError(msg) {
+                errorBox.textContent = msg;
+                errorBox.style.display = 'block';
+                errorBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+
+            function hideError() { errorBox.style.display = 'none'; }
+
+            function showSuccess(orderId) {
+                const shortId = String(orderId).substring(0, 8).toUpperCase();
+                document.getElementById('successOrderNum').textContent = `Order #${shortId}`;
+                formWrapper.style.display = 'none';
+                successEl.style.display   = 'block';
+
+                // Update steps UI to show step 3 active
+                document.querySelectorAll('.step')[2].classList.add('active');
+                document.querySelectorAll('.step-line')[1].classList.add('done');
+
+                // Update cart count badge
+                const badge = document.querySelector('.cart-count');
+                if (badge) badge.textContent = '0';
+            }
+        })();
+    </script>
+</body>
+
+</html>
