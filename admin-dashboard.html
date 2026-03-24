@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard | Chlorice Lab Admin</title>
+    <title>Dashboard | Chlorice Skincare Lab Admin</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -249,6 +249,57 @@
         #pImageFile {
             display: none;
         }
+
+        /* Dynamic List Styles */
+        .dynamic-list {
+            margin-top: 0.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .dynamic-item {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+        .dynamic-item input {
+            flex-grow: 1;
+        }
+        .btn-remove {
+            background: #FEE2E2;
+            color: #B91C1C;
+            border: 1px solid #FECACA;
+            border-radius: 8px;
+            padding: 0.5rem;
+            cursor: pointer;
+            line-height: 1;
+        }
+        .btn-add-item {
+            margin-top: 0.75rem;
+            background: #F0FDF4;
+            color: #166534;
+            border: 1px solid #BBF7D0;
+            padding: 0.6rem 1.2rem;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: fit-content;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .btn-add-item:hover {
+            background: #DCFCE7;
+            border-color: #86EFAC;
+            transform: translateY(-1px);
+        }
+        .section-divider {
+            margin: 2rem 0 1.5rem;
+            border-top: 1px solid #F3F4F6;
+            padding-top: 1.5rem;
+        }
     </style>
 </head>
 
@@ -451,6 +502,25 @@
                     </div>
                     <input type="hidden" id="pImageUrl">
                 </div>
+
+                <div class="section-divider">
+                    <label style="display:block; font-size:0.75rem; font-weight:600; color:#385A48; margin-bottom:0.5rem;">✨ KEY BENEFITS</label>
+                    <div id="benefitsList" class="dynamic-list"></div>
+                    <button type="button" class="btn-add-item" onclick="addDynamicItem('benefitsList')">+ Add Benefit</button>
+                </div>
+
+                <div class="section-divider">
+                    <label style="display:block; font-size:0.75rem; font-weight:600; color:#385A48; margin-bottom:0.5rem;">🧪 SCIENTIFIC FORMULATION</label>
+                    <div id="formulationsList" class="dynamic-list"></div>
+                    <button type="button" class="btn-add-item" onclick="addDynamicItem('formulationsList')">+ Add Ingredient/Detail</button>
+                </div>
+
+                <div class="section-divider">
+                    <label style="display:block; font-size:0.75rem; font-weight:600; color:#385A48; margin-bottom:0.5rem;">📝 HOW TO USE STEPS</label>
+                    <div id="usageList" class="dynamic-list"></div>
+                    <button type="button" class="btn-add-item" onclick="addDynamicItem('usageList')">+ Add Step</button>
+                </div>
+
                 <div id="productFormError" style="display:none;background:#FEE2E2;color:#B91C1C;padding:0.75rem;border-radius:8px;font-size:0.875rem;margin-top:0.5rem;"></div>
                 <div class="form-actions">
                     <button type="button" class="btn-action" onclick="closeProductModal()">Cancel</button>
@@ -663,7 +733,70 @@
             }
 
             document.getElementById('productFormError').style.display = 'none';
+            
+            // Clear and Load Dynamic Lists
+            document.getElementById('benefitsList').innerHTML = '';
+            document.getElementById('formulationsList').innerHTML = '';
+            document.getElementById('usageList').innerHTML = '';
+
+            if (product) {
+                loadRelatedData(product.id);
+            } else {
+                // Add one empty field for each by default
+                addDynamicItem('benefitsList');
+                addDynamicItem('formulationsList');
+                addDynamicItem('usageList');
+            }
+
             document.getElementById('productModal').classList.remove('hidden');
+        }
+
+        function addDynamicItem(listId, value = '') {
+            const list = document.getElementById(listId);
+            const div = document.createElement('div');
+            div.className = 'dynamic-item';
+            div.style.marginBottom = '0.5rem';
+            div.innerHTML = `
+                <input type="text" value="${value.replace(/"/g, '&quot;')}" 
+                    placeholder="Enter detail..." 
+                    style="border: 1px solid #E5E7EB; border-radius: 10px; padding: 0.75rem 1rem; font-size: 0.9rem; transition: all 0.2s;">
+                <button type="button" class="btn-remove" onclick="this.parentElement.remove()" 
+                    style="width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; border-radius: 10px;">×</button>
+            `;
+            
+            // Add focus effect via JS for dynamic elements
+            const input = div.querySelector('input');
+            input.onfocus = () => {
+                input.style.borderColor = '#385A48';
+                input.style.boxShadow = '0 0 0 3px rgba(56,90,72,0.08)';
+            };
+            input.onblur = () => {
+                input.style.borderColor = '#E5E7EB';
+                input.style.boxShadow = 'none';
+            };
+            
+            list.appendChild(div);
+        }
+
+        async function loadRelatedData(productId) {
+            try {
+                const [benefits, formulations, usage] = await Promise.all([
+                    db.from('product_benefits').select('benefit_text').eq('product_id', productId),
+                    db.from('product_formulations').select('formulation_text').eq('product_id', productId),
+                    db.from('product_usage').select('step_text').eq('product_id', productId).order('step_order', { ascending: true })
+                ]);
+
+                if (benefits.data) benefits.data.forEach(b => addDynamicItem('benefitsList', b.benefit_text));
+                if (formulations.data) formulations.data.forEach(f => addDynamicItem('formulationsList', f.formulation_text));
+                if (usage.data) usage.data.forEach(u => addDynamicItem('usageList', u.step_text));
+
+                // If empty after loading, add one empty line
+                if (!benefits.data?.length) addDynamicItem('benefitsList');
+                if (!formulations.data?.length) addDynamicItem('formulationsList');
+                if (!usage.data?.length) addDynamicItem('usageList');
+            } catch (err) {
+                console.error('Error loading related data:', err);
+            }
         }
 
         // Image Preview Logic
@@ -744,11 +877,35 @@
                 };
 
                 btn.textContent = 'Saving Product Data...';
-                const { error } = id
-                    ? await db.from('products').update(payload).eq('id', id)
-                    : await db.from('products').insert(payload);
+                const { data: savedProduct, error } = id
+                    ? await db.from('products').update(payload).eq('id', id).select().single()
+                    : await db.from('products').insert(payload).select().single();
 
                 if (error) throw error;
+                const newId = id || savedProduct.id;
+
+                // 3. Save Related Data
+                btn.textContent = 'Saving Benefits & Details...';
+                
+                // Collect data from dynamic lists
+                const benefits = Array.from(document.querySelectorAll('#benefitsList input')).map(i => i.value.trim()).filter(v => v);
+                const formulations = Array.from(document.querySelectorAll('#formulationsList input')).map(i => i.value.trim()).filter(v => v);
+                const usage = Array.from(document.querySelectorAll('#usageList input')).map(i => i.value.trim()).filter(v => v);
+
+                // Delete old records first
+                await Promise.all([
+                    db.from('product_benefits').delete().eq('product_id', newId),
+                    db.from('product_formulations').delete().eq('product_id', newId),
+                    db.from('product_usage').delete().eq('product_id', newId)
+                ]);
+
+                // Insert new records
+                const promises = [];
+                if (benefits.length) promises.push(db.from('product_benefits').insert(benefits.map(text => ({ product_id: newId, benefit_text: text }))));
+                if (formulations.length) promises.push(db.from('product_formulations').insert(formulations.map(text => ({ product_id: newId, formulation_text: text }))));
+                if (usage.length) promises.push(db.from('product_usage').insert(usage.map((text, idx) => ({ product_id: newId, step_text: text, step_order: idx + 1 }))));
+
+                await Promise.all(promises);
 
                 closeProductModal();
                 loadProductsTable();

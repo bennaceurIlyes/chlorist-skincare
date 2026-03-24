@@ -22,7 +22,7 @@
         <div class="container header-container">
             <a href="index.html" class="logo">
                 <img src="img/logo.jpg" alt="Chlorice Skincare logo">
-                Chlorice <span style="font-weight: 300;">Lab</span>
+                Chlorice Skincare <span style="font-weight: 300;">Lab</span>
             </a>
             <nav>
                 <ul class="nav-links">
@@ -48,134 +48,139 @@
             </div>
         </div>
     </header>
-
     <!-- CONTENT WRAPPER -->
-    <main style="padding-top: 100px;">
+    <main style="padding-top: 100px; min-height: 80vh; background: linear-gradient(180deg, #FFFFFF 0%, #FAFAFA 100%);">
 
         <!-- Product Overview -->
-        <section class="section">
-            <div class="container layout-split">
-
-                <!-- Product Gallery -->
-                <div class="fade-in-up">
-                    <div
-                        style="background-color: var(--color-botanical-light); border-radius: var(--border-radius-lg); padding: var(--spacing-xl); text-align: center;">
-                        <img src="img/produit1.png" alt="Bechar Brightening Cream"
-                            style="max-height: 500px; margin: 0 auto; transition: transform 0.4s ease;"
-                            onmouseover="this.style.transform='scale(1.05)'"
-                            onmouseout="this.style.transform='scale(1)'">
-                    </div>
+        <section class="section" style="padding-top: var(--spacing-md);">
+            <div class="container">
+                <div style="margin-bottom: var(--spacing-md);">
+                    <a href="products.html" style="color: var(--color-terracotta); font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; display: inline-flex; align-items: center; gap: 0.5rem;">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                        Back to Shop
+                    </a>
                 </div>
 
-                <!-- Product Details -->
-                <div class="fade-in-up" style="transition-delay: 0.1s;">
-                    <div style="margin-bottom: var(--spacing-sm);">
-                        <a href="products.html"
-                            style="color: var(--color-terracotta); font-size: 0.875rem; font-weight: 600; text-transform: uppercase;">&larr;
-                            Back to Care</a>
-                        <span style="color: var(--color-grey-medium); margin: 0 0.5rem;">|</span>
-                        <span class="product-category" style="display:inline;">Face Care</span>
+                <div class="layout-split" style="align-items: flex-start; gap: var(--spacing-lg);">
+
+                    <!-- Product Gallery -->
+                    <div class="fade-in-up" style="position: sticky; top: 120px;">
+                        <div style="background-color: #F8F9FA; border-radius: var(--border-radius-lg); padding: var(--spacing-lg); text-align: center; position: relative; overflow: hidden; border: 1px solid #F0F0F0;">
+                            <div style="position: absolute; top: 20px; right: 20px;">
+                                <span class="badge" style="background: var(--color-botanical-green); color: white; border: none;">Dermatologically Tested</span>
+                            </div>
+                            <img id="mainProductImage" src="img/produit1.png" alt="Product Image"
+                                style="max-height: 550px; margin: 0 auto; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); filter: drop-shadow(0 20px 30px rgba(0,0,0,0.05));"
+                                onmouseover="this.style.transform='scale(1.08)'"
+                                onmouseout="this.style.transform='scale(1)'">
+                        </div>
                     </div>
 
-                    <h1 style="margin-bottom: 0.5rem;">Bechar Brightening Cream</h1>
-                    <p style="font-size: 1.5rem; font-weight: 500; margin-bottom: 1.5rem;">4500 DA</p>
+                    <!-- Product Info -->
+                    <div class="fade-in-up" style="transition-delay: 0.1s;">
+                        <div style="margin-bottom: 2.5rem;">
+                            <span id="productCategory" class="product-category" style="color: var(--color-terracotta); margin-bottom: 0.75rem;">FACE CARE</span>
+                            <h1 id="productName" style="margin-bottom: 0.75rem; font-size: 3rem; letter-spacing: -0.01em;">Product Name</h1>
+                            <div style="display: flex; align-items: baseline; gap: 1rem; margin-bottom: 1.5rem;">
+                                <span id="productPrice" style="font-size: 2rem; font-weight: 500; color: var(--color-black);">0 DA</span>
+                                <span id="productOldPrice" style="text-decoration: line-through; color: var(--color-grey-medium); font-size: 1.25rem; display: none;">0 DA</span>
+                            </div>
+                            <p id="productDescription" class="text-lead" style="margin-bottom: 2rem; color: #555; line-height: 1.6;">Description goes here...</p>
+                            
+                            <div style="margin-top: 2rem; display: flex; gap: 1rem;">
+                                <button class="btn btn-primary add-to-cart" id="mainAddToCartBtn" style="flex-grow: 1; padding: 1.2rem; border-radius: 12px; font-weight: 600; font-size: 1rem;">
+                                    Add to Collection
+                                </button>
+                            </div>
+                        </div>
 
-                    <p class="text-lead" style="margin-bottom: 2rem;">Natural formula combining recognized brightening
-                        agents to treat hyperpigmentation and eliminate dark spots.</p>
+                        <!-- Technical Details Tabs -->
+                        <div class="details-tabs" style="border-top: 1px solid #EEE; padding-top: 2rem;">
+                            <div style="display: flex; gap: 2rem; border-bottom: 1px solid #EEE; margin-bottom: 1.5rem;">
+                                <button class="tab-btn active" onclick="switchTab(event, 'benefits')" style="background:none; border:none; padding: 1rem 0; font-family:var(--font-heading); font-weight:600; font-size:0.9rem; text-transform:uppercase; letter-spacing:0.05em; cursor:pointer; color:var(--color-black); position:relative;">Benefits</button>
+                                <button class="tab-btn" onclick="switchTab(event, 'formulation')" style="background:none; border:none; padding: 1rem 0; font-family:var(--font-heading); font-weight:600; font-size:0.9rem; text-transform:uppercase; letter-spacing:0.05em; cursor:pointer; color:var(--color-grey-medium); position:relative;">Science</button>
+                                <button class="tab-btn" onclick="switchTab(event, 'usage')" style="background:none; border:none; padding: 1rem 0; font-family:var(--font-heading); font-weight:600; font-size:0.9rem; text-transform:uppercase; letter-spacing:0.05em; cursor:pointer; color:var(--color-grey-medium); position:relative;">Usage</button>
+                            </div>
 
-                    <!-- Accordion or list info -->
-                    <div style="border-top: 1px solid var(--color-grey-light); padding: 1.5rem 0;">
-                        <h4 style="margin-bottom: 0.5rem;">✨ Key Benefits</h4>
-                        <ul style="list-style-position: inside; color: var(--color-black-light);">
-                            <li>Brightening and evening skin tone</li>
-                            <li>Clearing dark spots rapidly</li>
-                        </ul>
+                            <style>
+                                .tab-btn.active::after { content:''; position:absolute; bottom:-1px; left:0; width:100%; height:2px; background:var(--color-botanical-green); }
+                                .tab-btn.active { color: var(--color-botanical-green) !important; }
+                                .tab-content { display: none; animation: fadeIn 0.4s ease; }
+                                .tab-content.active { display: block; }
+                                .detail-list { list-style: none; }
+                                .detail-list li { margin-bottom: 1rem; position: relative; padding-left: 1.5rem; font-size: 0.95rem; color: #444; }
+                                .detail-list li::before { content: '•'; position: absolute; left: 0; color: var(--color-botanical-green); font-weight: bold; }
+                                @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+                            </style>
+
+                            <!-- Benefits Tab -->
+                            <div id="tab-benefits" class="tab-content active">
+                                <ul id="benefitsContent" class="detail-list">
+                                    <li>Loading benefits...</li>
+                                </ul>
+                            </div>
+
+                            <!-- Formulation Tab -->
+                            <div id="tab-formulation" class="tab-content">
+                                <p style="font-size: 0.85rem; text-transform: uppercase; color: var(--color-botanical-green); font-weight: 700; margin-bottom: 1rem; letter-spacing: 0.05em;">Key Ingredients</p>
+                                <ul id="formulationContent" class="detail-list">
+                                    <li>Loading formulation...</li>
+                                </ul>
+                            </div>
+
+                            <!-- Usage Tab -->
+                            <div id="tab-usage" class="tab-content">
+                                <div id="usageContent" style="display: flex; flex-direction: column; gap: 1.5rem;">
+                                    <p>Loading usage steps...</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
-                    <div style="border-top: 1px solid var(--color-grey-light); padding: 1.5rem 0;">
-                        <h4 style="margin-bottom: 0.5rem;">🧪 Scientific Formulation</h4>
-                        <p style="font-size: 0.95rem;">Licorice extract, Kojic acid, Alpha arbutin</p>
-                    </div>
-
-                    <div style="border-top: 1px solid var(--color-grey-light); padding: 1.5rem 0;">
-                        <h4 style="margin-bottom: 0.5rem;">📝 How to Use</h4>
-                        <p style="font-size: 0.95rem;">Daily use. Apply a pea-sized amount to a clean, dry
-                            face. Massage gently until fully absorbed.</p>
-                    </div>
-
-                    <div style="margin-top: 2rem; display: flex; gap: 1rem;">
-                        <button class="btn btn-primary add-to-cart" data-id="bechar-cream"
-                            data-name="Bechar Brightening Cream" data-price="4500" data-image="img/produit2.png"
-                            style="flex-grow: 1;">Add to Cart</button>
-                    </div>
                 </div>
-
             </div>
         </section>
 
-        <!-- Scientific Proof / Full Description -->
-        <section class="section bg-off-white">
-            <div class="container layout-split align-center text-center text-md-left">
-                <div class="fade-in-up">
-                    <span class="badge">Lab Certified</span>
-                    <h2>The Science Behind Bechar</h2>
-                    <p class="text-lead">It is not just a simple moisturizer. It is an expert dermatological
-                        intervention.</p>
-                    <p>The use of kojic acid significantly reduces melanin production, targeted precisely on
-                        hyperpigmented areas without damaging the surrounding healthy skin.</p>
-                </div>
-                <div class="fade-in-up">
-                    <img src="img/before.png" alt="Clinical study results"
-                        style="border-radius: var(--border-radius-lg); box-shadow: var(--shadow-md);">
-                </div>
-            </div>
-        </section>
-
+        <!-- Scientific Proof / Lab Notes -->
     </main>
 
-    <!-- FOOTER -->
-    <footer class="footer"
-        style="background-color: var(--color-botanical-green); padding: var(--spacing-xl) 0 var(--spacing-md);">
+    <!-- FOOTER (same as before) -->
+    <footer class="footer" style="background-color: var(--color-botanical-green); padding: var(--spacing-xl) 0 var(--spacing-sm);">
         <div class="container">
-            <div
-                style="display: flex; flex-direction: column; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: var(--spacing-lg); margin-bottom: var(--spacing-md);">
+            <div style="display: flex; flex-direction: column; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: var(--spacing-lg); margin-bottom: var(--spacing-md);">
                 <a href="index.html"
-                    style="font-family: var(--font-heading); font-size: 2.5rem; font-weight: 300; letter-spacing: 0.05em; color: var(--color-white); margin-bottom: 1rem;">Chlorice
+                    style="font-family: var(--font-heading); font-size: 2.5rem; font-weight: 300; letter-spacing: 0.05em; color: var(--color-white); margin-bottom: 1rem;">Chlorice Skincare
                     Lab</a>
-                <p style="color: var(--color-botanical-light); text-align: center; max-width: 400px;">Combining modern
-                    dermatological science with the purity of natural resources.</p>
+                <p style="color: var(--color-botanical-light); text-align: center; max-width: 400px;">Combining modern dermatological science with the purity of natural resources.</p>
             </div>
             <div class="footer-grid">
                 <div class="footer-col">
                     <h4 style="color: var(--color-terracotta-light); letter-spacing: 0.1em; font-weight: 500;">Shop</h4>
-                    <ul class="footer-links" style="align-items: center;">
+                    <ul class="footer-links">
                         <li><a href="products.html">All Products</a></li>
-                        <li><a href="products.html">Face Care</a></li>
-                        <li><a href="products.html">Hair Treatments</a></li>
+                        <li><a href="products.html">New Arrivals</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
-                    <h4 style="color: var(--color-terracotta-light); letter-spacing: 0.1em; font-weight: 500;">Brand
-                    </h4>
-                    <ul class="footer-links" style="align-items: center;">
+                    <h4 style="color: var(--color-terracotta-light); letter-spacing: 0.1em; font-weight: 500;">Brand</h4>
+                    <ul class="footer-links">
                         <li><a href="about.html">Our Story</a></li>
-                        <li><a href="testimonials.html">Testimonials</a></li>
+                        <li><a href="testimonials.html">Science & Results</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
-                    <h4 style="color: var(--color-terracotta-light); letter-spacing: 0.1em; font-weight: 500;">Connect
-                    </h4>
-                    <ul class="footer-links" style="align-items: center;">
-                        <li><a href="#">Instagram</a></li>
-                        <li><a href="#">TikTok</a></li>
+                    <h4 style="color: var(--color-terracotta-light); letter-spacing: 0.1em; font-weight: 500;">Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
                     </ul>
                 </div>
             </div>
-            <div class="footer-bottom" style="border-top: none; justify-content: center; gap: 2rem; flex-wrap: wrap;">
-                <p style="color: rgba(255,255,255,0.6);">&copy; 2026 Chlorice Skincare. All rights reserved.</p>
-                <p style="color: rgba(255,255,255,0.6);">Designed in Algeria 🇩🇿</p>
-                <a href="admin-login.html"
-                    style="color: rgba(255,255,255,0.4); text-decoration: none; font-size: 0.75rem;">Admin Access</a>
+            <div class="footer-bottom" style="border-top: none; justify-content: center; gap: 2rem; padding-bottom: 2rem;">
+                <p>&copy; 2026 Chlorice. All rights reserved.</p>
+                <div style="display: flex; gap: 1rem;">
+                    <a href="admin-login.html" style="opacity: 0.3; font-size: 0.7rem;">ADMIN</a>
+                </div>
             </div>
         </div>
     </footer>
@@ -184,19 +189,15 @@
     <div class="cart-overlay" id="cartOverlay"></div>
     <div class="cart-drawer" id="cartDrawer">
         <div class="cart-header">
-            <h3>Your Cart</h3>
+            <h3>Your Selection</h3>
             <button class="cart-close" id="cartClose">&times;</button>
         </div>
         <div class="cart-items" id="cartItemsContainer">
-            <!-- Items will be injected by JS -->
-            <div class="cart-empty-message">Your cart is empty</div>
+            <div class="cart-empty-message">Your tray is empty</div>
         </div>
         <div class="cart-footer">
-            <div class="cart-total-row">
-                <span>Subtotal</span>
-                <span id="cartSubtotal">$0.00</span>
-            </div>
-            <a href="checkout.html" class="btn btn-primary" style="width:100%; text-align:center; display:block; padding:0.9rem;">Checkout</a>
+            <div class="cart-total-row"><span>Subtotal</span><span id="cartSubtotal">0 DA</span></div>
+            <a href="checkout.html" class="btn btn-primary" style="width:100%; border-radius:12px; padding:1.2rem;">Complete Order</a>
         </div>
     </div>
 
@@ -207,6 +208,18 @@
     <script src="js/main.js"></script>
 
     <script>
+        function switchTab(event, tabId) {
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+                btn.style.color = 'var(--color-grey-medium)';
+            });
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            event.currentTarget.classList.add('active');
+            event.currentTarget.style.color = 'var(--color-black)';
+            document.getElementById('tab-' + tabId).classList.add('active');
+        }
+
         async function loadProductDetail() {
             const params = new URLSearchParams(window.location.search);
             const id = params.get('id');
@@ -214,64 +227,80 @@
 
             try {
                 const db = window._supabase;
-                const { data: product, error } = await db
-                    .from('products')
-                    .select('*')
-                    .eq('id', id)
-                    .single();
+                
+                // Fetch product and related data
+                const [productRes, benefitsRes, formulationsRes, usageRes] = await Promise.all([
+                    db.from('products').select('*').eq('id', id).single(),
+                    db.from('product_benefits').select('benefit_text').eq('product_id', id),
+                    db.from('product_formulations').select('formulation_text').eq('product_id', id),
+                    db.from('product_usage').select('step_text, step_order').eq('product_id', id).order('step_order')
+                ]);
 
-                if (error || !product) throw error || new Error('Product not found');
+                if (productRes.error || !productRes.data) throw productRes.error || new Error('Product not found');
+                const product = productRes.data;
 
                 // Update UI
-                document.title = `${product.name} | Chlorice Skincare`;
+                document.title = `${product.name} | Chlorice Skincare Lab`;
+                document.getElementById('productName').textContent = product.name;
+                document.getElementById('productDescription').textContent = product.description;
+                document.getElementById('mainProductImage').src = product.image || 'img/produit1.png';
                 
-                const galleryImg = document.querySelector('.section .layout-split img');
-                if (galleryImg) {
-                    galleryImg.src = product.image || 'img/produit1.png';
-                    galleryImg.alt = product.name;
-                    galleryImg.onerror = function() { this.src = 'img/produit1.png'; };
-                }
-
-                document.querySelector('h1').textContent = product.name;
-                
+                // Pricing
                 const hasPromo = product.promotion && parseFloat(product.promotion) > 0;
-                const discountedPrice = hasPromo
-                    ? (product.price - (product.price * product.promotion / 100)).toFixed(0)
-                    : Math.round(product.price);
+                const finalPrice = hasPromo ? product.price * (1 - product.promotion / 100) : product.price;
                 
-                const priceEl = document.querySelector('h1 + p');
-                if (priceEl) {
-                    priceEl.innerHTML = `${parseInt(discountedPrice).toLocaleString()} DA ${hasPromo ? `<span style="text-decoration:line-through; font-size:1rem; color:var(--color-grey-medium); margin-left:1rem;">${parseInt(product.price).toLocaleString()} DA</span>` : ''}`;
+                document.getElementById('productPrice').textContent = `${parseInt(finalPrice).toLocaleString()} DA`;
+                if (hasPromo) {
+                    const oldPrice = document.getElementById('productOldPrice');
+                    oldPrice.textContent = `${parseInt(product.price).toLocaleString()} DA`;
+                    oldPrice.style.display = 'inline';
                 }
 
-                const descEl = document.querySelector('.text-lead');
-                if (descEl) descEl.textContent = product.description || '';
+                // Related Data - Benefits
+                const benefitsHtml = benefitsRes.data?.length 
+                    ? benefitsRes.data.map(b => `<li>${b.benefit_text}</li>`).join('')
+                    : '<li>Targeted treatment for your specific skin needs.</li>';
+                document.getElementById('benefitsContent').innerHTML = benefitsHtml;
 
-                const addToCartBtn = document.querySelector('.add-to-cart');
-                if (addToCartBtn) {
-                    addToCartBtn.dataset.id = product.id;
-                    addToCartBtn.dataset.name = product.name;
-                    addToCartBtn.dataset.price = discountedPrice;
-                    addToCartBtn.dataset.image = product.image || 'img/produit1.png';
-                    
-                    addToCartBtn.onclick = () => {
-                        window.addToCart({
-                            id: String(product.id),
-                            productDbId: product.id,
-                            name: product.name,
-                            price: discountedPrice,
-                            image: product.image || 'img/produit1.png'
-                        });
-                    };
-                }
+                // Related Data - Formulations
+                const formulationsHtml = formulationsRes.data?.length 
+                    ? formulationsRes.data.map(f => `<li>${f.formulation_text}</li>`).join('')
+                    : '<li>Scientifically balanced for optimal skin health.</li>';
+                document.getElementById('formulationContent').innerHTML = formulationsHtml;
+
+                // Related Data - Usage
+                const usageHtml = usageRes.data?.length 
+                    ? usageRes.data.map(u => `
+                        <div style="display: flex; gap: 1rem;">
+                            <span style="background: var(--color-botanical-light); color: var(--color-botanical-green); width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; flex-shrink: 0;">${u.step_order}</span>
+                            <p style="margin: 0; font-size: 0.95rem;">${u.step_text}</p>
+                        </div>
+                    `).join('')
+                    : '<p>Apply daily to cleansed skin for best results.</p>';
+                document.getElementById('usageContent').innerHTML = usageHtml;
+
+                // Add to Cart Logic
+                const addToCartBtn = document.getElementById('mainAddToCartBtn');
+                addToCartBtn.onclick = () => {
+                    window.addToCart({
+                        id: String(product.id),
+                        productDbId: product.id,
+                        name: product.name,
+                        price: finalPrice,
+                        image: product.image || 'img/produit1.png'
+                    });
+                };
 
             } catch (err) {
                 console.error('Error loading product details:', err);
+                document.querySelector('main').innerHTML = `<div class="container" style="padding: 100px 0; text-align: center;"><h2>Unable to load product information.</h2><a href="products.html">Return to catalogue</a></div>`;
             }
         }
 
         window.addEventListener('load', loadProductDetail);
     </script>
 </body>
+</html>
+body>
 
 </html>
