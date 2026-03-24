@@ -200,9 +200,78 @@
         </div>
     </div>
 
+    <!-- Supabase CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="js/supabase.js"></script>
+    <!-- Main JS -->
     <script src="js/main.js"></script>
+
+    <script>
+        async function loadProductDetail() {
+            const params = new URLSearchParams(window.location.search);
+            const id = params.get('id');
+            if (!id) return;
+
+            try {
+                const db = window._supabase;
+                const { data: product, error } = await db
+                    .from('products')
+                    .select('*')
+                    .eq('id', id)
+                    .single();
+
+                if (error || !product) throw error || new Error('Product not found');
+
+                // Update UI
+                document.title = `${product.name} | Chlorice Skincare`;
+                
+                const galleryImg = document.querySelector('.section .layout-split img');
+                if (galleryImg) {
+                    galleryImg.src = product.image || 'img/produit1.png';
+                    galleryImg.alt = product.name;
+                    galleryImg.onerror = function() { this.src = 'img/produit1.png'; };
+                }
+
+                document.querySelector('h1').textContent = product.name;
+                
+                const hasPromo = product.promotion && parseFloat(product.promotion) > 0;
+                const discountedPrice = hasPromo
+                    ? (product.price - (product.price * product.promotion / 100)).toFixed(0)
+                    : Math.round(product.price);
+                
+                const priceEl = document.querySelector('h1 + p');
+                if (priceEl) {
+                    priceEl.innerHTML = `${parseInt(discountedPrice).toLocaleString()} DA ${hasPromo ? `<span style="text-decoration:line-through; font-size:1rem; color:var(--color-grey-medium); margin-left:1rem;">${parseInt(product.price).toLocaleString()} DA</span>` : ''}`;
+                }
+
+                const descEl = document.querySelector('.text-lead');
+                if (descEl) descEl.textContent = product.description || '';
+
+                const addToCartBtn = document.querySelector('.add-to-cart');
+                if (addToCartBtn) {
+                    addToCartBtn.dataset.id = product.id;
+                    addToCartBtn.dataset.name = product.name;
+                    addToCartBtn.dataset.price = discountedPrice;
+                    addToCartBtn.dataset.image = product.image || 'img/produit1.png';
+                    
+                    addToCartBtn.onclick = () => {
+                        window.addToCart({
+                            id: String(product.id),
+                            productDbId: product.id,
+                            name: product.name,
+                            price: discountedPrice,
+                            image: product.image || 'img/produit1.png'
+                        });
+                    };
+                }
+
+            } catch (err) {
+                console.error('Error loading product details:', err);
+            }
+        }
+
+        window.addEventListener('load', loadProductDetail);
+    </script>
 </body>
 
 </html>
