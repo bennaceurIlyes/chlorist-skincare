@@ -461,7 +461,7 @@
     <header class="header">
         <div class="container header-container">
             <a href="index.html" class="logo">
-                <img src="img/logo.jpg" alt="Chlorice Skincare logo">
+                <img src="img/logo.png" alt="Chlorice Skincare logo">
                 Chlorice <span style="font-weight: 300;">Lab</span>
             </a>
 
@@ -567,7 +567,7 @@
                         </div>
                         <div class="summary-row">
                             <span>Shipping</span>
-                            <span class="shipping-tag">FREE</span>
+                            <span id="summaryShipping">0 DA</span>
                         </div>
                         <div class="summary-row total">
                             <span>Total</span>
@@ -744,6 +744,16 @@
                 if (cart.length === 0) return; // keep empty notice visible
 
                 const subtotal = cart.reduce((a, i) => a + parseFloat(i.price) * i.quantity, 0);
+                const wilaya = document.getElementById('co_wilaya').value;
+                
+                let shippingFee = 0;
+                if (wilaya) {
+                    if (wilaya === 'Tamanrasset' || wilaya === 'Tindouf') {
+                        shippingFee = 1600;
+                    } else {
+                        shippingFee = 850;
+                    }
+                }
 
                 summaryEl.innerHTML = cart.map(item => `
                     <div class="summary-item">
@@ -761,12 +771,24 @@
                     </div>
                 `).join('');
 
+                const shippingEl = document.getElementById('summaryShipping');
+                if (shippingFee > 0) {
+                    shippingEl.textContent = shippingFee.toLocaleString() + ' DA';
+                    shippingEl.className = ''; // remove shipping-tag if any
+                } else {
+                    shippingEl.textContent = 'Select Wilaya';
+                    shippingEl.className = 'shipping-tag';
+                }
+
                 subtotalEl.textContent = subtotal.toLocaleString() + ' DA';
-                totalEl.textContent    = subtotal.toLocaleString() + ' DA';
+                totalEl.textContent    = (subtotal + shippingFee).toLocaleString() + ' DA';
                 totalsEl.style.display = '';
             }
 
             renderSummary();
+
+            // Re-render summary when wilaya changes to update shipping fee
+            document.getElementById('co_wilaya').addEventListener('change', renderSummary);
 
             // ── Form submission ─────────────────────────
             form.addEventListener('submit', async (e) => {
@@ -819,6 +841,21 @@
                         quantity:   item.quantity,
                         price:      parseFloat(item.price)
                     }));
+
+                    // Add shipping as a line item
+                    let shippingFee = 0;
+                    if (wilaya === 'Tamanrasset' || wilaya === 'Tindouf') {
+                        shippingFee = 1600;
+                    } else {
+                        shippingFee = 850;
+                    }
+                    
+                    items.push({
+                        order_id:   orderId,
+                        product_id: null, // Shipping fee entry
+                        quantity:   1,
+                        price:      shippingFee
+                    });
 
                     const { error: itemsErr } = await db.from('order_items').insert(items);
                     if (itemsErr) throw itemsErr;

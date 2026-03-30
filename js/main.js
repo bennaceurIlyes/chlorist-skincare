@@ -211,8 +211,34 @@ document.addEventListener('DOMContentLoaded', () => {
                         <input type="tel" id="co_phone" placeholder="e.g. 0555 123 456" required>
                     </div>
                     <div class="checkout-field">
+                        <label>Wilaya</label>
+                        <select id="co_wilaya_quick" required>
+                            <option value="">— Select Wilaya —</option>
+                            <option>Adrar</option><option>Chlef</option><option>Laghouat</option>
+                            <option>Oum El Bouaghi</option><option>Batna</option><option>Béjaïa</option>
+                            <option>Biskra</option><option>Béchar</option><option>Blida</option>
+                            <option>Bouira</option><option>Tamanrasset</option><option>Tébessa</option>
+                            <option>Tlemcen</option><option>Tiaret</option><option>Tizi Ouzou</option>
+                            <option>Alger</option><option>Djelfa</option><option>Jijel</option>
+                            <option>Sétif</option><option>Saïda</option><option>Skikda</option>
+                            <option>Sidi Bel Abbès</option><option>Annaba</option><option>Guelma</option>
+                            <option>Constantine</option><option>Médéa</option><option>Mostaganem</option>
+                            <option>M'Sila</option><option>Mascara</option><option>Ouargla</option>
+                            <option>Oran</option><option>El Bayadh</option><option>Illizi</option>
+                            <option>Bordj Bou Arréridj</option><option>Boumerdès</option>
+                            <option>El Tarf</option><option>Tindouf</option><option>Tissemsilt</option>
+                            <option>El Oued</option><option>Khenchela</option><option>Souk Ahras</option>
+                            <option>Tipaza</option><option>Mila</option><option>Aïn Defla</option>
+                            <option>Naâma</option><option>Aïn Témouchent</option><option>Ghardaïa</option>
+                            <option>Relizane</option><option>Timimoun</option><option>Bordj Badji Mokhtar</option>
+                            <option>Ouled Djellal</option><option>Béni Abbès</option><option>In Salah</option>
+                            <option>In Guezzam</option><option>Touggourt</option><option>Djanet</option>
+                            <option>El M'Ghair</option><option>El Meniaa</option>
+                        </select>
+                    </div>
+                    <div class="checkout-field">
                         <label>Delivery Address</label>
-                        <textarea id="co_address" rows="3" placeholder="Street, City, Wilaya" required></textarea>
+                        <textarea id="co_address" rows="3" placeholder="Street, City..." required></textarea>
                     </div>
                     <div class="checkout-summary" id="checkoutSummary"></div>
                     <div id="checkoutError" class="checkout-error" style="display:none;"></div>
@@ -325,6 +351,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Wire up events
         document.getElementById('checkoutBackdrop').addEventListener('click', closeCheckoutModal);
         document.getElementById('checkoutCloseBtn').addEventListener('click', closeCheckoutModal);
+        document.getElementById('co_wilaya_quick').addEventListener('change', () => window.openCheckoutModal());
         document.getElementById('checkoutForm').addEventListener('submit', handleCheckoutSubmit);
     }
 
@@ -337,15 +364,26 @@ document.addEventListener('DOMContentLoaded', () => {
         // Render order summary
         const summary = document.getElementById('checkoutSummary');
         const subtotal = cart.reduce((a, i) => a + parseFloat(i.price) * i.quantity, 0);
+        
+        const wilaya = document.getElementById('co_wilaya_quick').value;
+        let shippingFee = 0;
+        if (wilaya) {
+            shippingFee = (wilaya === 'Tamanrasset' || wilaya === 'Tindouf') ? 1600 : 850;
+        }
+
         summary.innerHTML = cart.map(i => `
             <div class="co-item">
                 <span>${i.name} × ${i.quantity}</span>
                 <span>${(parseFloat(i.price) * i.quantity).toLocaleString()} DA</span>
             </div>
         `).join('') + `
+            <div class="co-item" style="border-top: 1px dashed #EEE; margin-top: 0.5rem; padding-top: 0.5rem; color: #6B7280; font-size: 0.8rem;">
+                <span>Shipping</span>
+                <span>${shippingFee > 0 ? shippingFee.toLocaleString() + ' DA' : 'Select Wilaya'}</span>
+            </div>
             <div class="co-total">
                 <span>Total</span>
-                <span>${subtotal.toLocaleString()} DA</span>
+                <span>${(subtotal + shippingFee).toLocaleString()} DA</span>
             </div>
         `;
 
@@ -378,9 +416,12 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!db) throw new Error('Database not connected.');
 
             // 1. Create the order
+            const wilaya = document.getElementById('co_wilaya_quick').value;
+            const fullAddress = `${address}, ${wilaya}`;
+
             const { data: orderData, error: orderErr } = await db
                 .from('orders')
-                .insert({ customer_name: name, customer_phone: phone, customer_address: address })
+                .insert({ customer_name: name, customer_phone: phone, customer_address: fullAddress })
                 .select('id')
                 .single();
 
@@ -397,6 +438,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const { error: itemsErr } = await db.from('order_items').insert(items);
             if (itemsErr) throw itemsErr;
+
+            // 2b. Insert shipping as a line item
+            let shippingFee = (wilaya === 'Tamanrasset' || wilaya === 'Tindouf') ? 1600 : 850;
+            const { error: shipErr } = await db.from('order_items').insert({
+                order_id: orderId,
+                product_id: null,
+                quantity: 1,
+                price: shippingFee
+            });
+            if (shipErr) throw shipErr;
 
             // 3. Clear cart and show success
             cart = [];
